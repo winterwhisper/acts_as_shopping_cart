@@ -11,10 +11,12 @@ module ActiveRecord
           unless cart_item
             item = shopping_cart_items.new({:item => object, :price => price, :quantity => quantity}.merge(opts))
             item.save
+            item
           else
             cumulative = cumulative == true ? cart_item.quantity : 0
             cart_item.quantity = (cumulative + quantity)
             cart_item.save
+            cart_item
           end
         end
 
